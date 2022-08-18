@@ -20,6 +20,8 @@ def main():
         zipf.extractall("dataset/v{}".format(st.session_state['dcount']))
 
     Codeset = os.listdir("dataset/v{}".format(st.session_state['dcount']))
+    for i in Codeset:
+        print(i)
     # preds = glob.glob("dataset/v{}/*.*".format(st.session_state['dcount']), recursive=True)
 
     # results = model(preds)
