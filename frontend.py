@@ -1,6 +1,5 @@
 import streamlit as st
 import os
-# import torch
 from PIL import Image
 import glob
 import zipfile
@@ -20,26 +19,48 @@ def main():
         zipf.extractall("dataset/v{}".format(st.session_state['dcount']))
 
     Codeset = os.listdir("dataset/v{}".format(st.session_state['dcount']))
-    for i in Codeset:
-        print(i)
-    # preds = glob.glob("dataset/v{}/*.*".format(st.session_state['dcount']), recursive=True)
 
-    # results = model(preds)
-    # # results.code
-    # results.render()
-    # os.mkdir("output/v{}".format(st.session_state['dcount']))
-    # for index,im in enumerate(results.code):
-        
-    #     img = Image.fromarray(im)
-    #     img.save('output/v{}/{}'.format(st.session_state['dcount'], imgname[index]))
+    
+    c = st.container()
+    c.write('___________  FILES  ___________')
 
-    #     st.image('output/v{}/{}'.format(st.session_state['dcount'], imgname[index]))
 
-    # st.button('Predict')
+    Codeset = 'C:/Users/nikhi/OneDrive/Documents/gitUploads/Frontend/dataset/v1'
+    for code_path in sorted(glob.glob(os.path.join(Codeset, '*.py' ))):
+        code_path = code_path.replace("/","\\")
+        all = open(code_path)
+        file_stat = os.stat(code_path)
+        file_details = {"filename":code_path, "filetype":'Python',"filesize":file_stat.st_size}
+        st.write(file_details)
+        st.text(all.read())
 
-# dcount = 0
-# if __name__ == '__main__':
-#     model = torch.hub.load('ultralytics/yolov5', 'yolov5s', pretrained=True, _verbose=False)
-#     model.classes = [0]
-#     main()
+    for code_path in sorted(glob.glob(os.path.join(Codeset, '*.c' ))):
+        code_path = code_path.replace("/","\\")
+        all = open(code_path)
+        file_stat = os.stat(code_path)
+        file_details = {"filename":code_path, "filetype":'C',"filesize":file_stat.st_size}
+        st.write(file_details)
+        st.text(all.read())
+
+
 main()
+
+# import streamlit as st
+# import os
+
+# filename = st.text_input('Enter a file path:')
+# try:
+#     with open(filename) as input:
+#         st.text(input.read())
+# except FileNotFoundError:
+#     st.error('File not found.')
+
+# file_details = {"filename":image_file.name, "filetype":image_file.type,"filesize":image_file.size}
+# st.write(file_details)
+
+# import os
+
+# file_stat = os.stat('my_file.txt')
+# print(file_stat.st_size)
+
+# st.subheader(all.read(), anchor=None)
