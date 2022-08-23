@@ -72,3 +72,13 @@ main()
 # print(file_stat.st_size)
 
 # st.subheader(all.read(), anchor=None)
+
+
+# import os
+# import streamlit as st
+# filelist=[]
+# for root, dirs, files in os.walk("C:/Users/nikhi/OneDrive/Documents/gitUploads/Frontend/dataset/v1"):
+#       for file in files:
+#              filename=os.path.join(root, file)
+#              filelist.append(filename)
+# st.write(filelist)
