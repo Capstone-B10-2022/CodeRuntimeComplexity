@@ -9,8 +9,8 @@ def training(state, process_table_sidebar):
     ...
 ... # evaluation, prediction, save_and_load, free_coding, deployment
 # Implementation
-
-pages = {
+def main(state)
+    pages = {
         "Preprocessing": data_preprocess,
         "Training": training,
         "Evaluation": evaluation,

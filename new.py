@@ -6,7 +6,7 @@ import zipfile
 
 def data_upload(state):
     autosave_session(state)
-    st.title('Time Complexity Prediction')
+    st.title('Upload')
     code = st.file_uploader("Choose Codes", type = ['zip'] , help = "Choose Code files in Python, C or Java and upload Zip file")
     
     if 'dcount' not in st.session_state:
@@ -59,18 +59,21 @@ def data_metadata(state):
     autosave_session(state)
     st.title("Files")
 
-def main():
+def main(state):
     pages = {
         "Upload": data_upload,
         "Dataset": data_show,
         "Files": data_metadata,
     }
-    
-    c = st.container()
-    c.write('___________  FILES  ___________')
+    st.title('Time Complexity Prediction')
+    state.page = st.sidebar.radio("Null", 
+    tuple(pages.keys()),                             
+    index=tuple(pages.keys()).index(state.page) if state.page else   0)
+    if st.sidebar.button("Logout"):
+        state.clear()
 
 
     
 
-
-main()
+if __name__ == "__main__":
+    state = _get_state()
