@@ -4,8 +4,8 @@ from PIL import Image
 import glob
 import zipfile
 
-def main():
-    st.title('Time Complexity Prediction')
+def data_upload():
+    st.title('Upload')
     code = st.file_uploader("Choose Codes", type = ['zip'] , help = "Choose Code files in Python, C or Java and upload Zip file")
     
     if 'dcount' not in st.session_state:
@@ -20,7 +20,9 @@ def main():
 
     Codeset = os.listdir("dataset/v{}".format(st.session_state['dcount']))
 
-    
+def data_show():
+    st.title("MetaData and Dataset")
+
     c = st.container()
     c.write('___________  FILES  ___________')
 
@@ -46,10 +48,29 @@ def main():
         code_path = code_path.replace("/","\\")
         all = open(code_path)
         file_stat = os.stat(code_path)
-        file_details = {"filename":code_path, "filetype":'Java',"filesize":file_stat.st_size}
+        file_details = {"filename":code_path, "filetype":'C',"filesize":file_stat.st_size}
         st.write(file_details)
         st.text(all.read())
 
+
+def data_metadata():
+    st.title("Files")
+    filelist=[]
+    for root, dirs, files in os.walk("C:/Users/nikhi/OneDrive/Documents/gitUploads/Frontend/dataset/v1"):
+        for file in files:
+                filename=os.path.join(root, file)
+                filelist.append(filename)
+    st.write(filelist)
+
+def main():
+    pages = {
+        "Upload": data_upload,
+        "Dataset": data_show,
+        "Files": data_metadata,
+    }
+    st.title('Time Complexity Prediction')
+    selected_page = st.sidebar.selectbox("Select a page", pages.keys())
+    pages[selected_page]()
 
 main()
 
