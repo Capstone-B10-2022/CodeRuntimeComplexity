@@ -58,7 +58,7 @@ def main():
         "Files": data_metadata,
     }
     st.title('Time Complexity Prediction')
-    st.sidebar.title('Time')
+    st.sidebar.title('Time Complexity Prediction')
     selected_page = st.sidebar.radio("Select a page", pages.keys())
     pages[selected_page]()
 
