@@ -4,8 +4,7 @@ from PIL import Image
 import glob
 import zipfile
 
-def data_upload(state):
-    autosave_session(state)
+def data_upload():
     st.title('Upload')
     code = st.file_uploader("Choose Codes", type = ['zip'] , help = "Choose Code files in Python, C or Java and upload Zip file")
     
@@ -21,8 +20,7 @@ def data_upload(state):
 
     Codeset = os.listdir("dataset/v{}".format(st.session_state['dcount']))
 
-def data_show(state):
-    autosave_session(state)
+def data_show():
     st.title("MetaData and Dataset")
 
     c = st.container()
@@ -55,25 +53,23 @@ def data_show(state):
         st.text(all.read())
 
 
-def data_metadata(state):
-    autosave_session(state)
+def data_metadata():
     st.title("Files")
+    filelist=[]
+    for root, dirs, files in os.walk("C:/Users/nikhi/OneDrive/Documents/gitUploads/Frontend/dataset/v1"):
+        for file in files:
+                filename=os.path.join(root, file)
+                filelist.append(filename)
+    st.write(filelist)
 
-def main(state):
+def main():
     pages = {
         "Upload": data_upload,
         "Dataset": data_show,
         "Files": data_metadata,
     }
     st.title('Time Complexity Prediction')
-    state.page = st.sidebar.radio("Null", 
-    tuple(pages.keys()),                             
-    index=tuple(pages.keys()).index(state.page) if state.page else   0)
-    if st.sidebar.button("Logout"):
-        state.clear()
+    selected_page = st.sidebar.selectbox("Select a page", pages.keys())
+    pages[selected_page]()
 
-
-    
-
-if __name__ == "__main__":
-    state = _get_state()
+main()
