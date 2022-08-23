@@ -46,7 +46,7 @@ def main():
         code_path = code_path.replace("/","\\")
         all = open(code_path)
         file_stat = os.stat(code_path)
-        file_details = {"filename":code_path, "filetype":'C',"filesize":file_stat.st_size}
+        file_details = {"filename":code_path, "filetype":'Java',"filesize":file_stat.st_size}
         st.write(file_details)
         st.text(all.read())
 
