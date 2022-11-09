@@ -10,38 +10,44 @@ import os
 from PIL import Image
 import glob
 import zipfile
-
-global pred
-gcount = 0
+import shutil
 
 base_directory = 'C:/Users/nikhi/OneDrive/Documents/gitUploads/Frontend/dataset'
+
 def data_upload():
     st.title('Upload')
     code = st.file_uploader("Choose Code files in Python, C or Java and upload Zip file", type = ['zip'] , help = "Choose Code files in Python, C or Java and upload Zip file")
+
+
+    if not os.path.exists(base_directory):
+        os.makedirs(base_directory)
+    shutil.rmtree(base_directory)
     
     if 'dcount' not in st.session_state:
         st.session_state['dcount'] = 0
 
     if not code:
         return
-        
+    
     with zipfile.ZipFile(code,"r") as zipf:
         st.session_state['dcount'] += 1
         zipf.extractall("dataset/v{}".format(st.session_state['dcount']))
 
     Codeset = os.listdir("dataset/v{}".format(st.session_state['dcount']))
 
+
 def data_show():
-    global pred
-    global gcount
-    if gcount == 0:
-        pred = integrated_main()
-        gcount += 1
+
+    if not os.path.exists(base_directory):
+        os.makedirs(base_directory)
+
+    pred = integrated_main()
 
     st.title("MetaData and Dataset")
 
     c = st.container()
     c.write('___________  FILES  ___________')
+    c.write('\n\n')
     Codeset = base_directory + '\\v*'
     
     count = 0
@@ -56,13 +62,16 @@ def data_show():
                 file_type = 'C'
             else:
                 file_type = 'Java'
-            file_details = {"filename":code_path,
+            file_details = {
+                            "filename":code_path,
                             "filetype":file_type,
                             "filesize":file_stat.st_size,
-                            "TimeComplexity":pred[count]}
+                            "TimeComplexity":pred[count]
+                            }
             count += 1
             st.write(file_details)
             st.text(all.read())
+            st.write('\n')
 
 def data_metadata():
     st.title("Files")
@@ -76,7 +85,6 @@ def data_metadata():
     st.write(filelist)
 
 def main():
-    global gcount
     pages = {
         "Upload": data_upload,
         "Dataset": data_show,
@@ -86,6 +94,5 @@ def main():
     st.sidebar.title('Time Complexity Prediction')
     selected_page = st.sidebar.radio("Select a page", pages.keys())
     pages[selected_page]()
-    gcount += 1
 
 main()
