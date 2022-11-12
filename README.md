@@ -1,12 +1,12 @@
-# Frontend
+# CodeRuntimeComplexity
 
-Planned frontend using streamlit
+Steps
 
 Clone this Repo
 
-Download Streamlit -
+Install Requirements
 
-      pip install streamlit
+      pip install requirements.txt
 
 Run - 
 
