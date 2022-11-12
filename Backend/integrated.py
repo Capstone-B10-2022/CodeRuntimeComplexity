@@ -97,8 +97,8 @@ def integrated_main():
     base_directory = r"C:\Users\nikhi\OneDrive\Documents\gitUploads\Frontend"
     test = np.load(out_path)
 
-    model = pickle.load(open(base_directory + '\\rf_lang.pkl', 'rb'), encoding='latin1')
-    sc = pickle.load(open(base_directory + '\\scaler.pkl', 'rb'), encoding='latin1')
+    model = pickle.load(open(base_directory + 'Models' + '\\rf_lang.pkl', 'rb'), encoding='latin1')
+    sc = pickle.load(open(base_directory + 'Models' + '\\scaler.pkl', 'rb'), encoding='latin1')
 
     test_df = []
     for i in range(len(test)):
