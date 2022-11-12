@@ -4,6 +4,8 @@ Steps
 
 Clone this Repo
 
+Install Requirements
+
       pip install requirements.txt
 
 Run - 
