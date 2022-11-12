@@ -12,7 +12,7 @@ import glob
 import zipfile
 import shutil
 
-base_directory = 'C:/Users/nikhi/OneDrive/Documents/gitUploads/Frontend/dataset'
+base_directory = 'C:/Users/nikhi/OneDrive/Documents/gitUploads/CodeRuntimeComplexity/Dataset'
 
 def data_upload():
     st.title('Upload')
@@ -31,9 +31,9 @@ def data_upload():
     
     with zipfile.ZipFile(code,"r") as zipf:
         st.session_state['dcount'] += 1
-        zipf.extractall("dataset/v{}".format(st.session_state['dcount']))
+        zipf.extractall("Dataset/v{}".format(st.session_state['dcount']))
 
-    Codeset = os.listdir("dataset/v{}".format(st.session_state['dcount']))
+    Codeset = os.listdir("Dataset/v{}".format(st.session_state['dcount']))
 
 
 def data_show():

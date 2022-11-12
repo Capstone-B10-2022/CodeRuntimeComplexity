@@ -16,7 +16,7 @@ import streamlit as st
 
 def integrated_main():
 
-    base_directory = r"C:\Users\nikhi\OneDrive\Documents\gitUploads\Frontend\dataset"
+    base_directory = r"C:\Users\nikhi\OneDrive\Documents\gitUploads\CodeRuntimeComplexity\Dataset"
     if not os.path.exists(base_directory):
         os.makedirs(base_directory)
     
@@ -94,11 +94,11 @@ def integrated_main():
     with open(out_path, 'wb') as fp:
         np.save(fp,embeddings)
     
-    base_directory = r"C:\Users\nikhi\OneDrive\Documents\gitUploads\Frontend"
+    base_directory = r"C:\Users\nikhi\OneDrive\Documents\gitUploads\CodeRuntimeComplexity"
     test = np.load(out_path)
 
-    model = pickle.load(open(base_directory + 'Models' + '\\rf_lang.pkl', 'rb'), encoding='latin1')
-    sc = pickle.load(open(base_directory + 'Models' + '\\scaler.pkl', 'rb'), encoding='latin1')
+    model = pickle.load(open(base_directory + '\\Models\\rf_lang.pkl', 'rb'), encoding='latin1')
+    sc = pickle.load(open(base_directory + '\\Models\\scaler.pkl', 'rb'), encoding='latin1')
 
     test_df = []
     for i in range(len(test)):
@@ -113,5 +113,5 @@ def integrated_main():
     test_df= sc.transform(test_df)
     class_names = ['O(logN)',  'O(N)',  'O(N2)', 'O(N3)', 'O(Nd)',  'O(NlogN)']
     pred = [class_names[i] for i in model.predict(test_df)]
-    np.save(base_directory + '\\dataset\\pred.npy', pred)
+    np.save(base_directory + '\\Dataset\\pred.npy', pred)
     return pred
