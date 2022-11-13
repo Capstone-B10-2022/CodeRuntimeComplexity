@@ -16,7 +16,7 @@ import streamlit as st
 
 def integrated_main():
 
-    base_directory = r"C:\Users\nikhi\OneDrive\Documents\gitUploads\CodeRuntimeComplexity\Dataset"
+    base_directory = os.getcwd() + '\\Dataset'
     if not os.path.exists(base_directory):
         os.makedirs(base_directory)
     
@@ -94,7 +94,7 @@ def integrated_main():
     with open(out_path, 'wb') as fp:
         np.save(fp,embeddings)
     
-    base_directory = r"C:\Users\nikhi\OneDrive\Documents\gitUploads\CodeRuntimeComplexity"
+    base_directory = os.getcwd()
     test = np.load(out_path)
 
     model = pickle.load(open(base_directory + '\\Models\\rf_lang.pkl', 'rb'), encoding='latin1')

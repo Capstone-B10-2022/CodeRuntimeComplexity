@@ -11,8 +11,9 @@ from PIL import Image
 import glob
 import zipfile
 import shutil
+import math
 
-base_directory = 'C:/Users/nikhi/OneDrive/Documents/gitUploads/CodeRuntimeComplexity/Dataset'
+base_directory = os.getcwd() + '\\Dataset'
 
 def data_upload():
     st.title('Upload')
@@ -40,8 +41,15 @@ def data_show():
 
     if not os.path.exists(base_directory):
         os.makedirs(base_directory)
-
-    pred = integrated_main()
+    try: 
+        pred = integrated_main()
+    except ValueError as ve:
+        st.title("MetaData and Dataset")
+        c = st.container()
+        c.write('___________  FILES  ___________')
+        c.write('\n\n')
+        c.write('NO FILES')
+        return
 
     st.title("MetaData and Dataset")
 
