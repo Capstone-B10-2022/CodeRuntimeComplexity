@@ -6,7 +6,7 @@ from tqdm import tqdm
 def C_PP( ip_path, op_path):
     Preprocessed = op_path
     cmd = ''
-    pycpath = r'C:\Users\nikhi\OneDrive\Documents\Engineering-3\6thSEM\Capstone\code\pycparser\utils\fake_libc_include' # Path to pycparsers fake_lib_include
+    pycpath = r'C:\Users\nikhi\OneDrive\Documents\Engineering-3\6thSEM\Capstone\code\pycparser\utils\fake_libc_include' # Path to pycparsers fake_lib_include (Change path here)
     ip_fname = Path(ip_path).stem
     op_path = Preprocessed+ '\\' + ip_fname + '_PP.c'     # Output file name = ip_fname_PP.c
     cmd = 'gcc -E -I' + pycpath + ' ' + ip_path + ' > ' + op_path
