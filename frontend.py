@@ -13,6 +13,9 @@ import zipfile
 import shutil
 import math
 
+import warnings as wr
+wr.filterwarnings("ignore")
+
 base_directory = os.getcwd() + '\\Dataset'
 
 def data_upload():
